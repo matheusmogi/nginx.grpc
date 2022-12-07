@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "NginxPoC";
+
+package greet;
+
+// The greeting service definition.
+service Greeter { 
+  
+  // Unary
+  rpc UnaryCall (HelloRequest) returns (HelloReply);
+
+  // Server streaming
+  rpc StreamingFromServer (HelloRequest) returns (stream HelloReply);
+
+  // Client streaming
+  rpc StreamingFromClient (stream HelloRequest) returns (HelloReply);
+
+  // Bi-directional streaming
+  rpc StreamingBothWays (stream HelloRequest) returns (stream HelloReply);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
