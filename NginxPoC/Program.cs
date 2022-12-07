@@ -11,16 +11,13 @@ builder.Services.AddGrpcReflection();
 
 var app = builder.Build();
 
-var env = app.Environment;
-
-if (env.IsDevelopment())
-{
-    app.MapGrpcReflectionService();
-}
+app.MapGrpcReflectionService();
+app.UseGrpcWeb();
 
 // Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
+app.MapGrpcService<GreeterService>()
+    .EnableGrpcWeb()
+    .RequireCors("AllowAll");
 app.MapGet("/",
     () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-
-app.Run();
+app.Run("http://localhost:5001");

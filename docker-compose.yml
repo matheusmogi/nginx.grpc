@@ -1,0 +1,9 @@
+﻿version: "3.9"  # optional since v1.27.0
+services:
+  api:
+    build: .
+    image: grpcui.api
+    container_name: grpcui.api
+    ports:
+      - "5001:5001"  
+   
